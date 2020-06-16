@@ -1,0 +1,46 @@
+package Homework;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+public class USCrimesClass {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		String crimeFileName = args[0];
+		File crimeFile;
+		List<List<String>> crimeStatsArray = new ArrayList<>();
+		Scanner inputStream = null;
+		String[][] crimeStatArray = new String[20][21];
+		
+		try {
+			crimeFile = new File(crimeFileName);
+			inputStream = new Scanner(crimeFile);
+			int row = 0;
+			while(inputStream.hasNext()) {
+				String line = inputStream.next();
+				String[] valuesInLine = line.split(",");
+				crimeStatsArray.add(Arrays.asList(valuesInLine));
+				crimeStatArray[row] = valuesInLine.toArray(new String[valuesInLine.size()]);
+				//for(int col = 0; col <= crimeStatArray[row].length; col++) {
+				//	crimeStatArray[row][col] = valuesInLine[col];
+				//}
+				row++;
+				System.out.println(valuesInLine.toString());
+			}
+			System.out.println(crimeStatsArray.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(inputStream != null) {
+				inputStream.close();
+			}
+			
+		}
+		System.out.println(crimeStatsArray.get(40));
+			
+	}
+
+}
